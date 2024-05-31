@@ -6,33 +6,30 @@
 package vista;
 
 import modelo.HabitacionDAO;
-import modelo.EmpleadoDAO;
-import controlador.clsBitacora;
-import controlador.clsUsuarioConectado;
 import controlador.Habitacion;
+import controlador.clsBitacora;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import controlador.clsUsuarioConectado;
+import modelo.Conexion;
 import java.sql.Connection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-import modelo.Conexion;
 
 /**
  *
  * @author visitante
  */
 public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
-        clsBitacora Auditoria = new clsBitacora();
-        int codigoAplicacion = 2504;
 
+            int codigoAplicacion = 2504;
+            clsBitacora Auditoria = new clsBitacora();
     public void llenadoDeCombos() {
        /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         List<Empleado> empleados = empleadoDAO.select();
@@ -44,35 +41,35 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Habitacion");
-        modelo.addColumn("ID tipo");
-        modelo.addColumn("ID tipocama");
-        modelo.addColumn("Precio");
+        modelo.addColumn("Carnet");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Telefono");
         modelo.addColumn("Estatus");
         HabitacionDAO habitacionDAO = new HabitacionDAO();
-        List<Habitacion> habitacion = habitacionDAO.select();
-        tablaHabitaciones.setModel(modelo);
+        List<Habitacion> habitacions = habitacionDAO.select();
+        tablaHabitacion.setModel(modelo);
         String[] dato = new String[5];
-        for (int i = 0; i < habitacion.size(); i++) {
-            dato[0] = habitacion.get(i).getId_habitacion();
-            dato[2] = habitacion.get(i).getId_tipohabitacion();
-            dato[3] = habitacion.get(i).getId_tipocama();
-            dato[4] = habitacion.get(i).getPrecio();
-            dato[5] = habitacion.get(i).getEstatus_habitacion();
+        for (int i = 0; i < habitacions.size(); i++) {
+            dato[0] = habitacions.get(i).getId_habitacion();
+            dato[1] = habitacions.get(i).getId_tipohabitacion();
+            dato[2] = habitacions.get(i).getId_tipocama();
+            dato[3] = habitacions.get(i).getPrecio();
+            dato[4] = habitacions.get(i).getEstatus_habitacion();
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
-    public void buscarVendedor() {
+    public void buscarHabitacion() {
         Habitacion habitacionAConsultar = new Habitacion();
         HabitacionDAO habitacionDAO = new HabitacionDAO();
-        habitacionAConsultar.setId_habitacion((txtbuscado.getText()));
+        habitacionAConsultar.setId_tipohabitacion((txtbuscado.getText()));
         habitacionAConsultar = habitacionDAO.query(habitacionAConsultar);
-        txtID.setText(habitacionAConsultar.getId_habitacion());
-        txtTipohabitacion.setText(habitacionAConsultar.getId_tipohabitacion());
-        txtTipocama.setText(habitacionAConsultar.getId_tipocama());
-        txtPrecio.setText(habitacionAConsultar.getPrecio());
+        txtCarnet.setText(habitacionAConsultar.getId_habitacion());
+        txtNombre.setText(habitacionAConsultar.getId_tipohabitacion());
+        txtDireccion.setText(habitacionAConsultar.getId_tipocama());
+        txtTelefono.setText(habitacionAConsultar.getPrecio());
         txtEstatus.setText(habitacionAConsultar.getEstatus_habitacion());
     }
 
@@ -100,19 +97,20 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
-        txtTipohabitacion = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaHabitaciones = new javax.swing.JTable();
+        tablaHabitacion = new javax.swing.JTable();
         txtEstatus = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtTipocama = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
+        txtCarnet = new javax.swing.JTextField();
         label7 = new javax.swing.JLabel();
         label8 = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        btnAyuda = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
@@ -147,7 +145,7 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         });
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("Cursos");
+        label1.setText("Alumnos");
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,10 +155,10 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         });
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("ID");
+        label3.setText("Carnet");
 
-        txtTipohabitacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtTipohabitacion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,24 +167,24 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        tablaHabitaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tablaHabitaciones.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHabitacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tablaHabitacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Habitacion", "ID Tipo", "ID Tipo Cama", "Precio", "Estatus"
+                "Carnet", "Nombre", "Telefono", "Direccion", "Estatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, true
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaHabitaciones);
+        jScrollPane1.setViewportView(tablaHabitacion);
 
         txtEstatus.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEstatus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
@@ -198,22 +196,29 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         lb.setText(".");
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("tipo H");
+        label6.setText("Nombre");
 
-        txtID.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-
-        txtTipocama.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtTipocama.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-
-        txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtPrecio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCarnet.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtCarnet.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label7.setText("Tipo Cama");
+        label7.setText("Direccion");
 
         label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label8.setText("Precio");
+        label8.setText("Telefono");
+
+        txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        txtDireccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
 
         btnReporte.setText("Reporte");
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -229,55 +234,49 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(label3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label8)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtTipohabitacion)
-                            .addComponent(txtID)
-                            .addComponent(txtTipocama, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPrecio))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnReporte))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnReporte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(label7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(label8))
+                                    .addComponent(label3)
+                                    .addComponent(label6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                    .addComponent(txtCarnet)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtDireccion))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(label5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -296,22 +295,22 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(label3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtTipohabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label6)))
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(label7)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lb))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTipocama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label7))
+                            .addComponent(label8)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label8))
-                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label5)
                             .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -326,8 +325,10 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
                             .addComponent(btnBuscar)
                             .addComponent(btnLimpiar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReporte)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAyuda)
+                    .addComponent(btnReporte))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -339,27 +340,27 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         Habitacion habitacionAEliminar = new Habitacion();
         habitacionAEliminar.setId_habitacion(txtbuscado.getText());
         habitacionDAO.delete(habitacionAEliminar);
-         Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "DEL");
+        Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "DEL");
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         HabitacionDAO habitacionDAO = new HabitacionDAO();
         Habitacion habitacionAInsertar = new Habitacion();
-        habitacionAInsertar.setId_habitacion(txtID.getText());
-        habitacionAInsertar.setId_tipohabitacion(txtTipohabitacion.getText());
-        habitacionAInsertar.setId_tipocama(txtTipocama.getText());
-        habitacionAInsertar.setPrecio(txtPrecio.getText());
+        habitacionAInsertar.setId_habitacion(txtCarnet.getText());
+        habitacionAInsertar.setId_tipohabitacion(txtNombre.getText());
+        habitacionAInsertar.setId_tipocama(txtDireccion.getText());
+        habitacionAInsertar.setPrecio(txtTelefono.getText());
         habitacionAInsertar.setEstatus_habitacion(txtEstatus.getText());
         habitacionDAO.insert(habitacionAInsertar);
-         Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "INS");
+        Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "INS");
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "SCR");
-        buscarVendedor();
+        buscarHabitacion();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -367,9 +368,9 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         HabitacionDAO habitacionDAO = new HabitacionDAO();
         Habitacion habitacionAActualizar = new Habitacion();
         habitacionAActualizar.setId_habitacion(txtbuscado.getText());
-        habitacionAActualizar.setId_tipohabitacion(txtTipohabitacion.getText());
-        habitacionAActualizar.setId_tipocama(txtTipocama.getText());
-        habitacionAActualizar.setPrecio(txtPrecio.getText());
+        habitacionAActualizar.setId_tipohabitacion(txtNombre.getText());
+        habitacionAActualizar.setId_tipocama(txtDireccion.getText());
+        habitacionAActualizar.setPrecio(txtTelefono.getText());
         habitacionAActualizar.setEstatus_habitacion(txtEstatus.getText());
         habitacionDAO.update(habitacionAActualizar);
         Auditoria.setIngresarBitacora(clsUsuarioConectado.getIdUsuario(), codigoAplicacion, "UPD");
@@ -377,18 +378,37 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtID.setText("");
-        txtTipohabitacion.setText("");
-        txtTipocama.setText("");
-        txtPrecio.setText("");
+        txtCarnet.setText("");
+        txtNombre.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
         txtEstatus.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        
+        //llenadoDeTablas();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\ayudas\\AyudasHabitacion.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\AyudasHabitacion.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no Fue encontrada");
+            }
+            System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
@@ -400,7 +420,7 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         try {
             conn = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                    + "/src/main/java/reportes/rptAlumnos.jrxml");
+                    + "/src/main/java/reportes/rptHabitacion.jrxml");
 	    print = JasperFillManager.fillReport(report, p, conn);
             JasperViewer view = new JasperViewer(print, false);
 	    view.setTitle("Reporte Prueba");
@@ -408,10 +428,12 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }//GEN-LAST:event_btnReporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
@@ -428,12 +450,12 @@ public class MantenimientoHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
-    private javax.swing.JTable tablaHabitaciones;
+    private javax.swing.JTable tablaHabitacion;
+    private javax.swing.JTextField txtCarnet;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEstatus;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtTipocama;
-    private javax.swing.JTextField txtTipohabitacion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }

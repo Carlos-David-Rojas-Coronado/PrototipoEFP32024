@@ -20,7 +20,7 @@ public class MdiGeneral extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setExtendedState(MdiGeneral.MAXIMIZED_BOTH);
-        this.setTitle("Segundo Parcial Carlos David Rojas Coronado 9959-21-504");
+        this.setTitle("Ejemplo Capas");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -37,17 +37,17 @@ public class MdiGeneral extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        menuAbrir_sesion = new javax.swing.JMenuItem();
-        menuCerrar_sesion = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        bitacora = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        mnuArchivo = new javax.swing.JMenu();
+        mnuArchivoAbrirSesion = new javax.swing.JMenuItem();
+        mnuArchivoCerrarSesion = new javax.swing.JMenuItem();
+        mnuCatalogos = new javax.swing.JMenu();
+        mnuCatalogosMantenimiento = new javax.swing.JMenu();
+        mnuCatalogosMantenimientosCursos = new javax.swing.JMenuItem();
+        mnuProcesos = new javax.swing.JMenu();
+        mnuReportes = new javax.swing.JMenu();
+        mnuSeguridad = new javax.swing.JMenu();
+        mnuSeguridadBitacora = new javax.swing.JMenuItem();
+        mnuAyudas = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -66,62 +66,62 @@ public class MdiGeneral extends javax.swing.JFrame {
             .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Archivo");
+        mnuArchivo.setText("Archivo");
 
-        menuAbrir_sesion.setText("Abrir Sesion");
-        menuAbrir_sesion.addActionListener(new java.awt.event.ActionListener() {
+        mnuArchivoAbrirSesion.setText("Abrir Sesion");
+        mnuArchivoAbrirSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAbrir_sesionActionPerformed(evt);
+                mnuArchivoAbrirSesionActionPerformed(evt);
             }
         });
-        jMenu2.add(menuAbrir_sesion);
+        mnuArchivo.add(mnuArchivoAbrirSesion);
 
-        menuCerrar_sesion.setText("Cerrar Sesion");
-        jMenu2.add(menuCerrar_sesion);
+        mnuArchivoCerrarSesion.setText("Cerrar Sesion");
+        mnuArchivo.add(mnuArchivoCerrarSesion);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(mnuArchivo);
 
-        jMenu1.setText("Catalogos");
+        mnuCatalogos.setText("Catalogos");
 
-        jMenu3.setText("Mantenimientos");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        mnuCatalogosMantenimiento.setText("Mantenimientos");
+        mnuCatalogosMantenimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
-            }
-        });
-
-        jMenuItem3.setText("Mantenimiento Habitaciones");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenu1.add(jMenu3);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu4.setText("Procesos");
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Reportes");
-        jMenuBar1.add(jMenu5);
-
-        jMenu7.setText("Seguridad");
-        jMenu7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu7ActionPerformed(evt);
+                mnuCatalogosMantenimientoActionPerformed(evt);
             }
         });
 
-        bitacora.setText("Consulta Bitacora");
-        jMenu7.add(bitacora);
+        mnuCatalogosMantenimientosCursos.setText("Mantenimiento habitaciones");
+        mnuCatalogosMantenimientosCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCatalogosMantenimientosCursosActionPerformed(evt);
+            }
+        });
+        mnuCatalogosMantenimiento.add(mnuCatalogosMantenimientosCursos);
 
-        jMenuBar1.add(jMenu7);
+        mnuCatalogos.add(mnuCatalogosMantenimiento);
 
-        jMenu6.setText("Ayuda");
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(mnuCatalogos);
+
+        mnuProcesos.setText("Procesos");
+        jMenuBar1.add(mnuProcesos);
+
+        mnuReportes.setText("Reportes");
+        jMenuBar1.add(mnuReportes);
+
+        mnuSeguridad.setText("Seguridad");
+
+        mnuSeguridadBitacora.setText("Consulta Bitacora");
+        mnuSeguridadBitacora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSeguridadBitacoraActionPerformed(evt);
+            }
+        });
+        mnuSeguridad.add(mnuSeguridadBitacora);
+
+        jMenuBar1.add(mnuSeguridad);
+
+        mnuAyudas.setText("Ayuda");
+        jMenuBar1.add(mnuAyudas);
 
         setJMenuBar(jMenuBar1);
 
@@ -139,32 +139,32 @@ public class MdiGeneral extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+    private void mnuCatalogosMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosMantenimientoActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    }//GEN-LAST:event_mnuCatalogosMantenimientoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void mnuCatalogosMantenimientosCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCatalogosMantenimientosCursosActionPerformed
         // TODO add your handling code here:
         MantenimientoHabitacion ventana = new MantenimientoHabitacion();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_mnuCatalogosMantenimientosCursosActionPerformed
 
-    private void menuAbrir_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrir_sesionActionPerformed
+    private void mnuArchivoAbrirSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuArchivoAbrirSesionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuAbrir_sesionActionPerformed
+    }//GEN-LAST:event_mnuArchivoAbrirSesionActionPerformed
 
-    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+    private void mnuSeguridadBitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSeguridadBitacoraActionPerformed
         // TODO add your handling code here:
         frmMantenimientoBitacora ventana = new frmMantenimientoBitacora();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_jMenu7ActionPerformed
+    }//GEN-LAST:event_mnuSeguridadBitacoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +192,7 @@ public class MdiGeneral extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MdiGeneral.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -202,20 +203,20 @@ public class MdiGeneral extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem bitacora;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem menuAbrir_sesion;
-    private javax.swing.JMenuItem menuCerrar_sesion;
+    private javax.swing.JMenu mnuArchivo;
+    private javax.swing.JMenuItem mnuArchivoAbrirSesion;
+    private javax.swing.JMenuItem mnuArchivoCerrarSesion;
+    private javax.swing.JMenu mnuAyudas;
+    private javax.swing.JMenu mnuCatalogos;
+    private javax.swing.JMenu mnuCatalogosMantenimiento;
+    private javax.swing.JMenuItem mnuCatalogosMantenimientosCursos;
+    private javax.swing.JMenu mnuProcesos;
+    private javax.swing.JMenu mnuReportes;
+    private javax.swing.JMenu mnuSeguridad;
+    private javax.swing.JMenuItem mnuSeguridadBitacora;
     // End of variables declaration//GEN-END:variables
 }

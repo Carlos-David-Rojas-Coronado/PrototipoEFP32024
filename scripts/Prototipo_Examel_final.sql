@@ -1,6 +1,6 @@
-DROP DATABASE dap;
-CREATE DATABASE dap;
-USE dap;
+DROP DATABASE crd;
+CREATE DATABASE crd;
+USE crd;
 CREATE TABLE IF NOT EXISTS usuario (
   id_usuario INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(60) NOT NULL,
@@ -19,3 +19,4 @@ CREATE TABLE habitacion
   estatus_habitacion VARCHAR(1),
   PRIMARY KEY (id_habitacion)
 ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
+

@@ -45,6 +45,8 @@ public class MdiGeneral extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        bitacora = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -106,6 +108,18 @@ public class MdiGeneral extends javax.swing.JFrame {
         jMenu5.setText("Reportes");
         jMenuBar1.add(jMenu5);
 
+        jMenu7.setText("Seguridad");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+
+        bitacora.setText("Consulta Bitacora");
+        jMenu7.add(bitacora);
+
+        jMenuBar1.add(jMenu7);
+
         jMenu6.setText("Ayuda");
         jMenuBar1.add(jMenu6);
 
@@ -143,6 +157,15 @@ public class MdiGeneral extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAbrir_sesionActionPerformed
 
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+        // TODO add your handling code here:
+        frmMantenimientoBitacora ventana = new frmMantenimientoBitacora();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    }//GEN-LAST:event_jMenu7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,6 +202,7 @@ public class MdiGeneral extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem bitacora;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -186,6 +210,7 @@ public class MdiGeneral extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
